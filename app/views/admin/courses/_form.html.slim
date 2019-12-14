@@ -1,0 +1,20 @@
+= simple_form_for [:admin, @course], wrapper: :horizontal_form, html: { class: 'form-horizontal' } do |f|
+  = f.input :name
+  = f.input :description
+  = f.association :teacher, collection: Teacher.all.order(id: :desc).decorate, label_method: :full_name
+  = f.association :disciplines
+  = f.input :main_image, wrapper: :horizontal_file_input
+  = f.input :main_image_cache, as: :hidden
+
+  .panel.panel-default
+    .panel-body.sections_sortable
+      = f.simple_fields_for :sections, f.object.sections.order(:position) do |section|
+        = render 'section_fields', f: section
+      .links.col-sm-offset-3.col-sm-9
+        = link_to_add_association 'Добавить раздел', f, :sections, class: 'btn btn-xs btn-success'
+
+  .row
+    .col-md-11.col-md-offset-3.button_box
+      = f.button :submit,  'Сохранить', class: 'btn btn-primary'
+      = link_to 'Отменить', admin_courses_path, class: 'btn btn-default'
+      = link_to 'Удалить', [:admin, @course], class: 'btn btn-danger', method: :delete, data: { confirm: 'Действительно хотите удалить?' } if @course.persisted?

@@ -1,0 +1,14 @@
+.row
+  = search_form_for [:admin, @q], builder: SimpleForm::FormBuilder, wrapper: :horizontal_form, html: { class: 'form-horizontal' } do |f|
+    .col-md-6
+      = f.input :viewed_eq, collection: [['Да', true], ['Нет', false]], required: false, label: 'Просмотрен'
+      = f.input :owner_type_eq, collection: [['Пользователь', 'User'], ['Преподаватель', 'Teacher']], required: false, label: 'Принадлежит'
+      = f.input :owner_of_User_type_id_eq, collection: @course.users.map{ |t| [t.decorate.full_name, t.id] }, required: false, label: 'Пользователь'
+
+    .col-md-6
+      = f.input :user_lesson_lesson_id_eq, collection: @course.lessons.order(:position).map{ |t| [t.name, t.id] }, required: false, label: 'Занятие'
+      = f.input :user_lesson_lesson_stop_lesson_eq, collection: [['Да', true], ['Нет', false]], required: false, label: 'Стоп занятие'
+      = f.input :user_lesson_state_in, collection: UserLesson.state_machine.states.map{ |state| [t("activerecord.state_machines.user_lesson.states.#{state.name}"), state.name] }, input_html: { multiple: true }, required: false, label: 'Статус'
+
+
+    = f.button :submit, 'Искать', class: 'btn btn-primary pull-right margin-right-20 margin-bottom-10'

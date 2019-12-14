@@ -1,0 +1,16 @@
+h3 Потоки
+
+= link_to 'Добавить Поток', [:new, :admin, @course, :flow], class: 'btn btn-success pull-right'
+
+table.table.table-striped
+  thead
+    tr
+      th
+      th Начало
+      th Окончание проверок
+      th Завершение
+      th Цена
+      th Статус
+
+  tbody
+    = render @flows

@@ -1,0 +1,21 @@
+tr
+  td
+    .btn-group-vertical role="group"
+      = link_to [:admin, course, :lessons], class: 'btn btn-info btn-sm' do
+        span.glyphicon.glyphicon-th-list aria-hidden="true"
+      = link_to [:edit, :admin, course], class: 'btn btn-primary btn-sm' do
+        span.glyphicon.glyphicon-pencil aria-hidden="true"
+      = link_to [:admin, course, :flows], class: 'btn btn-info btn-sm' do
+        span.glyphicon.glyphicon-calendar aria-hidden="true"
+      - if course.can_be_destroyed?
+        = link_to [:admin, course], class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Действительно хотите удалить?' } do
+          span.glyphicon.glyphicon-trash aria-hidden="true"
+  td= course.name
+  td
+    - course.flows.order(starts_at: :desc).decorate.each do |flow|
+      = flow.name
+      span.label.margin-left-10 class="label-#{flow.state_class}"
+        = t("activerecord.state_machines.flow.states.#{flow.state}")
+      br
+  td= course.teacher.decorate.full_name
+  td= course.disciplines_names

@@ -1,0 +1,10 @@
+.panel.panel-default
+  .panel-heading
+    = user_lesson.lesson.name
+  .panel-body
+    - user_lesson.answers.each do |answer|
+      .panel class=(answer.by_user? ? 'panel-warning' : 'panel-success')
+        .panel-heading
+          = answer.owner.decorate.full_name
+        .panel-body
+          = answer.text

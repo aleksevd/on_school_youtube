@@ -1,0 +1,12 @@
+.row
+  .col-md-offset-4.col-md-4
+    h3 Авторизуйтесь
+    hr
+    = simple_form_for resource, as: resource_name, url: session_path(resource_name), wrapper: :horizontal_form, html: { class: 'form-horizontal' } do |f|
+      = f.input :email, required: false, autofocus: true
+      = f.input :password, required: false
+      = f.input :remember_me, as: :boolean, wrapper: :horizontal_boolean
+
+      .row
+        .col-md-offset-3.col-sm-4.button_box
+          = f.button :submit, 'Войти', class: 'btn-primary'

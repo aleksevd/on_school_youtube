@@ -1,0 +1,11 @@
+= simple_form_for [:admin, @course, @flow], wrapper: :horizontal_form, html: { class: 'form-horizontal' } do |f|
+  = f.input :starts_at, as: :string, input_html: { class: 'datetimepicker', value: l(@flow.starts_at, format: :datetimepicker) }
+  = f.input :checks_finish_at, as: :string, input_html: { class: 'datetimepicker', value: l(@flow.checks_finish_at, format: :datetimepicker) }
+  = f.input :finishes_at, as: :string, input_html: { class: 'datetimepicker', value: l(@flow.finishes_at, format: :datetimepicker) }
+  = f.input :price
+
+  .row
+    .col-md-11.col-md-offset-3.button_box
+      = f.button :submit,  'Сохранить', class: 'btn btn-primary'
+      = link_to 'Отменить', [:admin, @course, :flows], class: 'btn btn-default'
+      = link_to 'Удалить', [:admin, @course, @flow], class: 'btn btn-danger', method: :delete, data: { confirm: 'Действительно хотите удалить?' } if @flow.persisted?

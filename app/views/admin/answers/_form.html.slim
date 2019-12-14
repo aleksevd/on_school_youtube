@@ -1,0 +1,36 @@
+= simple_form_for [:admin, @user_lesson, @answer], wrapper: :horizontal_form, html: { class: 'form-horizontal sound-recorder', data: { 'api-url' => admin_api_user_lesson_answers_path(@user_lesson, @answer) } }  do |f|
+
+  .col-md-11.col-md-offset-3.button_box.margin-top-10
+    = link_to '#', class: 'record btn btn-default btn-sm' do
+      span.text-danger.glyphicon.glyphicon-record.margin-right-3
+      = 'Записать Ответ'
+
+    = link_to '#', class: 'stop btn btn-default btn-sm hidden' do
+      = image_tag('spinners/recording.gif')
+      = 'Остановить Запись'
+
+    .sound-clips
+
+  = f.input :text
+
+  #answer_images
+    = f.simple_fields_for :answer_images do |form|
+      = render 'answer_image_fields', f: form
+
+    .col-md-offset-3.padding-bottom-10
+      = link_to_add_association 'Добавить картинку', f, :answer_images, class: 'btn btn-primary btn-xs'
+
+  - unless @user_lesson.completed?
+    = f.input :complete, as: :boolean, label: 'Принять после сохранения', wrapper: :horizontal_radio_and_checkboxes
+
+  .col-md-11.col-md-offset-3.errors_block
+
+  .row
+    .col-md-11.col-md-offset-3.button_box.margin-top-10
+      = f.button :submit,  'Сохранить', class: 'btn btn-primary'
+
+      - unless @user_lesson.completed?
+        = link_to 'Принять', [:admin, @user_lesson, user_lesson: { state_event: :complete }], method: :patch, class: 'btn btn-success', data: { confirm: 'Действительно хотите принять без сохранения?' }
+      - if @user_lesson.completed?
+        = link_to 'Вернуть на Доделку', [:admin, @user_lesson, user_lesson: { state_event: :reject }], method: :patch, class: 'btn btn-warning', data: { confirm: 'Действительно хотите Вернуть на доделку без сохранения?' }
+      = link_to 'Отменить', admin_answers_path, class: 'btn btn-default'

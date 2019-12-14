@@ -1,0 +1,4 @@
+ru:
+  time:
+    formats:
+      datetimepicker: '%d %m %Y, %H:%M'

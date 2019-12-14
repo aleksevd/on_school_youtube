@@ -1,0 +1,8 @@
+tr
+  td
+    .btn-group-vertical role="group"
+      = link_to [:edit, :admin, discipline], class: 'btn btn-primary btn-sm' do
+        span.glyphicon.glyphicon-pencil aria-hidden="true"
+      = link_to [:admin, discipline], class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Действительно хотите удалить?' } do
+        span.glyphicon.glyphicon-trash aria-hidden="true"
+  td= discipline.name

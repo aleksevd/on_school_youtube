@@ -1,0 +1,11 @@
+tr.lesson data-id=lesson.id
+  td
+    span.handle.glyphicon.glyphicon-magnet
+  td
+    .btn-group-vertical role="group"
+      = link_to [:edit, :admin, @course, lesson], class: 'btn btn-primary btn-sm' do
+        span.glyphicon.glyphicon-pencil aria-hidden="true"
+      = link_to [:admin, @course, lesson], class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Действительно хотите удалить?' } do
+        span.glyphicon.glyphicon-trash aria-hidden="true"
+  td.position= lesson.position
+  td= lesson.name

@@ -1,0 +1,11 @@
+h3 Ответы
+
+= link_to "#search_form", class: "btn btn-default margin-bottom-10", role:  "button", data: { toggle: "collapse" }, aria: { expanded: false, controls: "search_form" } do
+  span.glyphicon.glyphicon-search
+
+.collapse#search_form
+  = render 'search_form'
+
+= render @answers
+
+= paginate @answers, theme: 'twitter-bootstrap-3'

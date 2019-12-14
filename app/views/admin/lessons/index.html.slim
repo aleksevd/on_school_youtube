@@ -1,0 +1,14 @@
+h3 Занятие
+
+= link_to 'Добавить занятие', [:new, :admin, @course, :lesson], class: 'btn btn-success pull-right'
+
+table.table.table-striped
+  thead
+    tr
+      th
+      th
+      th Номер
+      th Название
+
+  tbody.lessons_sortable data-update-url=admin_api_lessons_mass_update_path
+    = render partial: 'section', collection: @course.sections.order(:position)

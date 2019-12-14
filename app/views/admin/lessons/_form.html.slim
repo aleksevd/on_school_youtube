@@ -1,0 +1,23 @@
+= simple_form_for [:admin, @course, @lesson], wrapper: :horizontal_form, html: { class: 'form-horizontal' } do |f|
+  = f.input :name
+  = f.association :section, collection: @course.sections.order(:position)
+  = f.input :free, wrapper: :horizontal_radio_and_checkboxes
+  = f.input :stop_lesson, wrapper: :horizontal_radio_and_checkboxes
+  = f.input :main_image, wrapper: :horizontal_file_input
+  = f.input :main_image_cache, as: :hidden
+  = f.input :video
+
+  - if @lesson.persisted?
+    = f.input :description, input_html: { class: 'tinymce', rows: 40, cols: 120 }
+    = tinymce(uploadimage_form_url: admin_api_lesson_tinymce_images_path(@lesson))
+
+    = f.input :without_homework, wrapper: :horizontal_radio_and_checkboxes
+    = f.input :homework, input_html: { class: 'tinymce', rows: 40, cols: 120 }
+    = tinymce(uploadimage_form_url: admin_api_lesson_tinymce_images_path(@lesson))
+
+  .row
+    .col-md-11.col-md-offset-3.button_box
+      = f.button :submit, 'Сохранить и продолжить', class: 'btn btn-primary'
+      = f.button :submit,  'Сохранить', class: 'btn btn-primary'
+      = link_to 'Отменить', [:admin, @course, :lessons], class: 'btn btn-default'
+      = link_to 'Удалить', [:admin, @course, @lesson], class: 'btn btn-danger', method: :delete, data: { confirm: 'Действительно хотите удалить?' } if @lesson.persisted?

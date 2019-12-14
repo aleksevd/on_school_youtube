@@ -1,0 +1,14 @@
+tr
+  td
+    .btn-group-vertical role="group"
+      = link_to [:edit, :admin, @course, flow], class: 'btn btn-primary btn-sm' do
+        span.glyphicon.glyphicon-pencil aria-hidden="true"
+      = link_to [:admin, @course, flow], class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Действительно хотите удалить?' } do
+        span.glyphicon.glyphicon-trash aria-hidden="true"
+  td= l(flow.starts_at, format: :long)
+  td= l(flow.checks_finish_at, format: :long)
+  td= l(flow.finishes_at, format: :long)
+  td= flow.price
+  td
+    span.label class="label-#{flow.decorate.state_class}"
+      = t("activerecord.state_machines.flow.states.#{flow.state}")

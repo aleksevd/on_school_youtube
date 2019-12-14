@@ -1,0 +1,41 @@
+.panel class="panel-#{answer.viewed? ? 'default' : 'warning'}"
+  .panel-heading
+    - if answer.user_lesson.lesson.stop_lesson?
+      span.text-danger.glyphicon.glyphicon-exclamation-sign.margin-right-10
+
+    b= answer.user_lesson.lesson.name
+
+    span.label.margin-left-10 class="label-#{answer.user_lesson.decorate.state_class}"
+      = t("activerecord.state_machines.user_lesson.states.#{answer.user_lesson.state}")
+
+    .pull-right
+      = l(answer.created_at, format: :short)
+
+  .panel-body
+    .row
+      .col-md-2
+        .media
+          .media-left
+            = image_tag answer.owner.avatar.small
+          .media-body
+            = answer.owner.decorate.full_name
+
+        .btn-group-vertical.padding-top-20 role="group"
+          - if action_name == 'index'
+            = link_to 'Ответить', [:new, :admin, answer.user_lesson, :answer], class: 'btn btn-primary btn-sm'
+          - else
+            - if answer.by_teacher?
+              = link_to 'Редактировать', [:edit, :admin, answer.user_lesson, answer], class: 'btn btn-info btn-sm'
+            = link_to 'Удалить', [:admin, answer], class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Действительно хотите удалить?' }
+
+      .col-md-10
+        - if answer.audio.present?
+          audio.margin-bottom-10.width-100-percentage controls=true controlsList="nodownload" src=answer.audio.url
+
+        p= answer.text if answer.text.present?
+
+        - answer.answer_images.each do |answer_image|
+          .col-lg-3.col-md-4.col-sm-4.padding-bottom-10
+            = link_to image_path(answer_image.file.big), data: { lightbox: "answer_image_#{answer.id}" } do
+              = image_tag answer_image.file.small
+

@@ -1,0 +1,12 @@
+.nested-fields.panel.panel-default
+  .panel-heading
+    .handle
+      span.glyphicon.glyphicon-magnet
+  .panel-body
+    = f.input :position, as: :hidden
+    = f.input :name
+    = f.input :description
+
+    .row
+      .col-sm-offset-3.col-sm-9
+        = link_to_remove_association "Удалить раздел", f, class: 'btn btn-xs btn-danger'

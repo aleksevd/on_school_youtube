@@ -1,0 +1,13 @@
+h3 Дисциплины
+
+= link_to 'Добавить дисциплину', new_admin_discipline_path, class: 'btn btn-success pull-right'
+
+table.table.table-striped
+  thead
+    tr
+      th
+      th Название
+  tbody
+    = render @disciplines
+
+= paginate @disciplines, theme: 'twitter-bootstrap-3'

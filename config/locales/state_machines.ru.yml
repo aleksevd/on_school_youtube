@@ -1,0 +1,25 @@
+ru:
+  activerecord:
+    state_machines:
+      user_lesson:
+        states:
+          active: Доступно
+          checking: Проверяется
+          rejected: Отклонено
+          completed: Завершено
+      flow:
+        states:
+          in_future: Запланирован
+          active: Активный
+          checks_finished: Проверки завершены
+          finished: Завершен
+    errors:
+      messages:
+        invalid: "не возможно"
+        # %{value} = attribute value, %{state} = Human state name
+        invalid_event: "невозможно перевести из состояния %{state}"
+        # %{value} = attribute value, %{event} = Human event name, %{state} = Human current state name
+        invalid_transition: "невозможно совершить %{event}"
+
+      # events:
+      #   park: 'estacionarse'

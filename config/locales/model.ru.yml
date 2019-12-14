@@ -1,0 +1,5 @@
+ru:
+  activerecord:
+    errors:
+      messages:
+        required: 'не может быть пустым'

@@ -1,0 +1,10 @@
+tr
+  td
+    .btn-group-vertical role="group"
+      = link_to [:edit, :admin, admin], class: 'btn btn-primary btn-sm' do
+        span.glyphicon.glyphicon-pencil aria-hidden="true"
+      = link_to [:admin, admin], class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Действительно хотите удалить?' } do
+        span.glyphicon.glyphicon-trash aria-hidden="true"
+  td= admin.email
+  td= admin.first_name
+  td= admin.last_name

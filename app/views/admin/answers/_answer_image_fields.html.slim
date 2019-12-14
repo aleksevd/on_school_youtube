@@ -1,0 +1,6 @@
+.nested-fields
+  = f.input :file, wrapper: :horizontal_file_input
+  = f.input :file_cache, as: :hidden
+
+  .col-md-offset-3.padding-bottom-10
+    = link_to_remove_association "Удалить", f, class: 'btn btn-danger btn-xs'

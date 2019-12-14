@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title OnSchool
+    = csrf_meta_tags
+    = stylesheet_link_tag    'admin', media: 'all'
+    = javascript_include_tag 'admin'
+  body
+    = render 'admin/shared/main_menu'
+    .container
+      - if current_admin
+        .row
+          .col-md-12.col-sm-12
+            ol.breadcrumb
+              = render_breadcrumbs tag: :li, separator: ""
+      .row
+        .col-md-12.col-sm-12
+          = render_flash
+      .row
+        .col-md-12.col-sm-12
+          = yield
+
+    footer.footer
+      br

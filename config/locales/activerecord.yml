@@ -1,0 +1,7 @@
+ru:
+  activerecord:
+    errors:
+      messages:
+        restrict_dependent_destroy:
+          has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
+          has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
