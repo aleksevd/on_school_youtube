@@ -214,7 +214,7 @@ GEM
     pry-theme (1.2.0)
       coderay (~> 1.1)
     puma (3.10.0)
-    rack (2.0.3)
+    rack (2.0.7)
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
     rails (5.1.4)
